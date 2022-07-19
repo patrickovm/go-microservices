@@ -30,11 +30,11 @@ func main() {
 	mongoCollection := client.Database(db).Collection(collection)
 
 	repo := repository.NewMongoRepository(mongoCollection)
-	userServer := server.NewTrainer(repo)
+	trainerServer := server.NewTrainer(repo)
 
 	gs := grpc.NewServer()
 
-	pb.RegisterTrainersServiceServer(gs, userServer)
+	pb.RegisterTrainersServiceServer(gs, trainerServer)
 
 	reflection.Register(gs)
 

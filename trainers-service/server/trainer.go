@@ -54,14 +54,14 @@ func (t Trainer) Get(ctx context.Context, req *pb.GetTrainerRequest) (*pb.GetTra
 	}, nil
 }
 
-func (t Trainer) List(ctx context.Context, req *pb.ListTrainerRequest) (*pb.ListTrainerResponse, error) {
+func (t Trainer) List(ctx context.Context, req *pb.ListTrainersRequest) (*pb.ListTrainersResponse, error) {
 	data, err := t.repo.List(ctx)
 
 	if err != nil {
 		return nil, err
 	}
 
-	var response pb.ListTrainerResponse
+	var response pb.ListTrainersResponse
 	for _, d := range *data {
 		response.Trainers = append(response.Trainers, &pb.GetTrainerResponse{
 			Id:            d.Id.Hex(),

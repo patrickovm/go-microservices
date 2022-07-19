@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 type TrainersServiceClient interface {
 	Create(ctx context.Context, in *CreateTrainerRequest, opts ...grpc.CallOption) (*CreateTrainerResponse, error)
 	Get(ctx context.Context, in *GetTrainerRequest, opts ...grpc.CallOption) (*GetTrainerResponse, error)
-	List(ctx context.Context, in *ListTrainerRequest, opts ...grpc.CallOption) (*ListTrainerResponse, error)
+	List(ctx context.Context, in *ListTrainersRequest, opts ...grpc.CallOption) (*ListTrainersResponse, error)
 	Update(ctx context.Context, in *UpdateTrainerRequest, opts ...grpc.CallOption) (*UpdateTrainerResponse, error)
 }
 
@@ -54,8 +54,8 @@ func (c *trainersServiceClient) Get(ctx context.Context, in *GetTrainerRequest, 
 	return out, nil
 }
 
-func (c *trainersServiceClient) List(ctx context.Context, in *ListTrainerRequest, opts ...grpc.CallOption) (*ListTrainerResponse, error) {
-	out := new(ListTrainerResponse)
+func (c *trainersServiceClient) List(ctx context.Context, in *ListTrainersRequest, opts ...grpc.CallOption) (*ListTrainersResponse, error) {
+	out := new(ListTrainersResponse)
 	err := c.cc.Invoke(ctx, "/protos.TrainersService/List", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (c *trainersServiceClient) Update(ctx context.Context, in *UpdateTrainerReq
 type TrainersServiceServer interface {
 	Create(context.Context, *CreateTrainerRequest) (*CreateTrainerResponse, error)
 	Get(context.Context, *GetTrainerRequest) (*GetTrainerResponse, error)
-	List(context.Context, *ListTrainerRequest) (*ListTrainerResponse, error)
+	List(context.Context, *ListTrainersRequest) (*ListTrainersResponse, error)
 	Update(context.Context, *UpdateTrainerRequest) (*UpdateTrainerResponse, error)
 	mustEmbedUnimplementedTrainersServiceServer()
 }
@@ -93,7 +93,7 @@ func (UnimplementedTrainersServiceServer) Create(context.Context, *CreateTrainer
 func (UnimplementedTrainersServiceServer) Get(context.Context, *GetTrainerRequest) (*GetTrainerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedTrainersServiceServer) List(context.Context, *ListTrainerRequest) (*ListTrainerResponse, error) {
+func (UnimplementedTrainersServiceServer) List(context.Context, *ListTrainersRequest) (*ListTrainersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedTrainersServiceServer) Update(context.Context, *UpdateTrainerRequest) (*UpdateTrainerResponse, error) {
@@ -149,7 +149,7 @@ func _TrainersService_Get_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _TrainersService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListTrainerRequest)
+	in := new(ListTrainersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -161,7 +161,7 @@ func _TrainersService_List_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/protos.TrainersService/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrainersServiceServer).List(ctx, req.(*ListTrainerRequest))
+		return srv.(TrainersServiceServer).List(ctx, req.(*ListTrainersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
