@@ -1,14 +1,21 @@
 syntax = "proto3";
 
-package trainers;
+package protos;
 
-option go_package = "github.com/patrickovm/go-microservices/trainers-service";
+option go_package = "./pb";
+
+service TrainersService {
+    rpc Create(CreateTrainerRequest) returns (CreateTrainerResponse) {};
+    rpc Get(GetTrainerRequest) returns (GetTrainerResponse) {};
+    rpc List(ListTrainerRequest) returns (ListTrainerResponse) {};
+    rpc Update(UpdateTrainerRequest) returns (UpdateTrainerResponse) {};
+}
 
 message CreateTrainerRequest {
     string first_name = 1;
     string last_name = 2;
     int32 age = 3;
-    int 32 finished_games = 4;
+    int32 finished_games = 4;
 }
 
 message CreateTrainerResponse {
@@ -30,7 +37,7 @@ message GetTrainerResponse {
 message ListTrainerRequest {}
 
 message ListTrainerResponse {
-    repeated GetTrainerResponse = 1;
+    repeated GetTrainerResponse trainers = 1;
 }
 
 message UpdateTrainerRequest {
