@@ -7,6 +7,7 @@ import (
 	"github.com/patrickovm/go-microservices/trainers-service/model"
 	"github.com/patrickovm/go-microservices/trainers-service/pb"
 	"github.com/patrickovm/go-microservices/trainers-service/repository"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Trainer struct {
@@ -72,4 +73,33 @@ func (t Trainer) List(ctx context.Context, req *pb.ListTrainerRequest) (*pb.List
 	}
 
 	return &response, nil
+}
+
+func (t Trainer) Update(ctx context.Context, req *pb.UpdateTrainerRequest) (*pb.UpdateTrainerResponse, error) {
+	c, cancel := context.WithTimeout(ctx, time.Second*10)
+	defer cancel()
+
+	trainerId, err := primitive.ObjectIDFromHex(req.GetId())
+	if err != nil {
+		return nil, err
+	}
+
+	updatedTrainer, err := t.repo.Update(c, &model.Trainer{
+		Id:            trainerId,
+		FirstName:     req.FirstName,
+		LastName:      req.LastName,
+		Age:           req.Age,
+		FinishedGames: req.FinishedGames,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.UpdateTrainerResponse{
+		Id:            updatedTrainer.Id.Hex(),
+		FirstName:     updatedTrainer.FirstName,
+		LastName:      updatedTrainer.LastName,
+		Age:           updatedTrainer.Age,
+		FinishedGames: updatedTrainer.FinishedGames,
+	}, nil
 }
