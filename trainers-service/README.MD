@@ -66,13 +66,13 @@ Message template:
 ## Message details for ListTrainersRequest
 
 ```sh
-grpcurl --plaintext -msg-template localhost:50051 describe pb.ListTrainersRequest
+grpcurl --plaintext -msg-template localhost:50051 describe protos.ListTrainersRequest
 ```
 
 returns
 ```
-protos.ListUsersRequest is a message:
-message ListUsersRequest {
+protos.ListTrainersRequest is a message:
+message ListTrainersRequest {
 }
 
 Message template:
@@ -82,29 +82,29 @@ Message template:
 ```
 <br/>
 
-## Execute a request for CreateUser
+## Execute a request for Create
 
 ```sh
-grpcurl --plaintext -d '{"firstName": "John", "lastName": "Doe", "age": 21, "finishedGames": 6}' localhost:50051 protos.UserService.CreateUser
+grpcurl --plaintext -d '{"firstName": "John", "lastName": "Doe", "age": 21, "finishedGames": 6}' localhost:50051 protos.TrainersService.Create
 ```
 returns
 ```
 {
-  "id": "ObjectID(\"62d6b76b51868410b2c4c48c\")"
+  "id": "ObjectID(\"62d7178cb910060d33849b39\")"
 }
 ```
 <br/>
 
-## Execute a request for GetUser
+## Execute a request for Get
 
 ```sh
-grpcurl --plaintext -d '{"id": "62d6b76b51868410b2c4c48c"}' localhost:50051 protos.UserService.GetUser
+grpcurl --plaintext -d '{"id": "62d7178cb910060d33849b39"}' localhost:50051 protos.TrainersService.Get
 ```
 
 returns
 ```
 {
-  "id": "62d6b76b51868410b2c4c48c",
+  "id": "62d7178cb910060d33849b39",
   "firstName": "John",
   "lastName": "Doe",
   "age": 21,
@@ -113,47 +113,47 @@ returns
 ```
 <br/>
 
-## Execute a request for ListUsers
+## Execute a request for List
 
 ```sh
-grpcurl --plaintext -d '{}' localhost:50051 protos.UserService.ListUsers
+grpcurl --plaintext -d '{}' localhost:50051 protos.TrainersService.List
 ```
 
 returns
 ```
 {
-  "users": [
+  "trainers": [
     {
-      "id": "62d6b76b51868410b2c4c48c",
+      "id": "62d7178cb910060d33849b39",
       "firstName": "John",
       "lastName": "Doe",
       "age": 21,
       "finishedGames": 6
     },
     {
-      "id": "62d6b8cd51868410b2c4c48d",
+      "id": "62d718a7b910060d33849b3a",
       "firstName": "Jack",
       "lastName": "Doe",
-      "age": 50,
-      "finishedGames": 5
+      "age": 21,
+      "finishedGames": 6
     }
   ]
 }
 ```
 
-## Execute a request for UpdateUser
+## Execute a request for Update
 
 ```sh
-grpcurl --plaintext -d '{"id": "62d6b8cd51868410b2c4c48d", "firstName": "Jack", "lastName": "Sparrow", "age": 21, "finishedGames": 2}' localhost:50051 protos.UserService.UpdateUser
+grpcurl --plaintext -d '{"id": "62d718a7b910060d33849b3a", "firstName": "Jack", "lastName": "Sparrow", "age": 21, "finishedGames": 2}' localhost:50051 protos.TrainersService.Update
 ```
 
 returns
 ```
 {
-  "id": "62d6b8cd51868410b2c4c48d", 
-  "firstName": "Jack", 
-  "lastName": "Sparrow", 
-  "age": 21, 
+  "id": "62d718a7b910060d33849b3a",
+  "firstName": "Jack",
+  "lastName": "Sparrow",
+  "age": 21,
   "finishedGames": 2
 }
 ```
