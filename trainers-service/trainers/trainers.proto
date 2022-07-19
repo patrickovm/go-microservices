@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package trainers;
+
+option go_package = "github.com/patrickovm/go-microservices/trainers-service";
+
+message CreateTrainerRequest {
+    string first_name = 1;
+    string last_name = 2;
+    int32 age = 3;
+    int 32 finished_games = 4;
+}
+
+message CreateTrainerResponse {
+    string id = 1;
+}
+
+message GetTrainerRequest {
+    string id = 1;
+}
+
+message GetTrainerResponse {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    int32 age = 4; 
+    int32 finished_games = 5; 
+}
+
+message ListTrainerRequest {}
+
+message ListTrainerResponse {
+    repeated GetTrainerResponse = 1;
+}
+
+message UpdateTrainerRequest {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    int32 age = 4; 
+    int32 finished_games = 5;
+}
+
+message UpdateTrainerResponse {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    int32 age = 4; 
+    int32 finished_games = 5;
+}
