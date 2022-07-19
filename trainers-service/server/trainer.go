@@ -15,7 +15,7 @@ type Trainer struct {
 	pb.UnimplementedTrainersServiceServer
 }
 
-func NewUser(repo repository.MongoRepo) *Trainer {
+func NewTrainer(repo repository.MongoRepo) *Trainer {
 	return &Trainer{repo: repo}
 }
 

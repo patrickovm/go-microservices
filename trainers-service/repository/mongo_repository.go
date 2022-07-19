@@ -16,7 +16,7 @@ type MongoRepository struct {
 	trainersCollection *mongo.Collection
 }
 
-func NewMongoUserDB(collection *mongo.Collection) *MongoRepository {
+func NewMongoRepository(collection *mongo.Collection) *MongoRepository {
 	return &MongoRepository{
 		trainersCollection: collection,
 	}
