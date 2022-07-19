@@ -7,7 +7,7 @@ option go_package = "./pb";
 service TrainersService {
     rpc Create(CreateTrainerRequest) returns (CreateTrainerResponse) {};
     rpc Get(GetTrainerRequest) returns (GetTrainerResponse) {};
-    rpc List(ListTrainerRequest) returns (ListTrainerResponse) {};
+    rpc List(ListTrainersRequest) returns (ListTrainersResponse) {};
     rpc Update(UpdateTrainerRequest) returns (UpdateTrainerResponse) {};
 }
 
@@ -34,9 +34,9 @@ message GetTrainerResponse {
     int32 finished_games = 5; 
 }
 
-message ListTrainerRequest {}
+message ListTrainersRequest {}
 
-message ListTrainerResponse {
+message ListTrainersResponse {
     repeated GetTrainerResponse trainers = 1;
 }
 
