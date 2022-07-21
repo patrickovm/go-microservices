@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package protos;
+
+option go_package = "./pb";
+
+service PokeService {
+    rpc Create(CreatePokemonRequest) returns (CreatePokemonResponse) {};
+    rpc GetAllFromOneTrainer(GetAllFromOneTrainerRequest) returns (GetAllFromOneTrainerResponse) {};
+    rpc Update(UpdatePokemonRequest) returns (UpdatePokemonResponse) {};
+}
+
+message CreatePokemonRequest {
+    string trainer_id = 1;
+    string name = 2;
+    bool has_badge = 3;
+}
+
+message CreatePokemonResponse {
+    int64 id = 1;
+}
+
+message GetAllFromOneTrainerRequest {
+    string trainer_id = 1;
+}
+
+message GetAllFromOneTrainerResponse {
+    repeated UpdatePokemonRequest = 1;
+}
+
+message UpdatePokemonRequest {
+    int64 id = 1;
+    string trainer_id = 2;
+    string name = 3;
+    bool has_badge = 4;   
+}
+
+message UpdatePokemonResponse {
+    int64 id = 1;
+    string trainer_id = 2;
+    string name = 3;
+    bool has_badge = 4;   
+}
